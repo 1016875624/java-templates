@@ -28,7 +28,7 @@ spring.datasource2.driverClassName=com.mysql.cj.jdbc.Driver
 DatasourceConfig.java
 
 ```java
-	@Bean(name = "slaveDataSource")
+    @Bean(name = "slaveDataSource")
     @Qualifier("slaveDataSource")
     @ConfigurationProperties(prefix = "spring.datasource2")
     public DataSource slaveDataSource() {
@@ -76,23 +76,23 @@ public class DatabaseContextHolder {
 DynamicDataSource
 
 ```java
-	/**
+    /**
      * 通过 返回的key的不同，可以获取到相应的数据源
      * 我们重点就是通过这个 方法来实现切换 数据源
      * 这里我们通过了DatabaseContextHolder 的静态方法来 获取当前的 db
      * 切换 数据源 就只要 调用DatabaseContextHolder 的setDBtype 就可以实现切换数据源
      * @return
      */
-@Override
-protected Object determineCurrentLookupKey() {
-    return DatabaseContextHolder.getDbType();
-}
+    @Override
+    protected Object determineCurrentLookupKey() {
+        return DatabaseContextHolder.getDbType();
+    }
 ```
 
 #### 5.创建动态数据源 bean
 
 ```java
-	/**
+    /**
      * 动态数据源实现方式 在这里可以进行配置动态数据源
      * @param masterDataSource
      * @param slaveDataSource
@@ -124,7 +124,7 @@ protected Object determineCurrentLookupKey() {
 6.将 mybatis的 sessionfactory 工厂 改为动态数据源
 
 ```java
-/**
+    /**
      * 为 mybatis 建立一个 sqlSessionFactory 并且指定数据源 为动态数据源
      * @param routingDataSource 动态数据源
      * @return sqlSessionFactory
