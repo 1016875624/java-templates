@@ -1,13 +1,11 @@
 package com.heky.mybatisstudy.config.datasoutce;
 
-import com.zaxxer.hikari.HikariDataSource;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.boot.context.properties.ConfigurationProperties;
+import org.springframework.boot.jdbc.DataSourceBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.jdbc.datasource.lookup.AbstractRoutingDataSource;
@@ -22,35 +20,20 @@ import java.util.Map;
  */
 @Configuration
 public class DatasourceConfig  {
-    @Bean
-    @Primary
-    @Qualifier("master")
-    @ConfigurationProperties("spring.datasource1")
-    public DataSourceProperties masterDataSourceProperties() {
-        return new DataSourceProperties();
-    }
 
-    @Bean
-    @ConfigurationProperties("spring.datasource2")
-    @Qualifier("slave")
-    public DataSourceProperties slaveDataSourceProperties() {
-        return new DataSourceProperties();
+    @Bean(name = "slaveDataSource")
+    @Qualifier("slaveDataSource")
+    @ConfigurationProperties(prefix = "spring.datasource2")
+    public DataSource slave() {
+        return DataSourceBuilder.create().build();
     }
 
     @Bean(name = "masterDataSource")
     @Qualifier("masterDataSource")
-    public DataSource masterDataSource(@Qualifier("master") DataSourceProperties masterDataSourceProperties) {
-        return masterDataSourceProperties.initializeDataSourceBuilder().type(HikariDataSource.class)
-                .build();
+    @ConfigurationProperties(prefix = "spring.datasource1")
+    public DataSource masterDataSource() {
+        return DataSourceBuilder.create().build();
     }
-
-    @Bean(name = "slaveDataSource")
-    @Qualifier("slaveDataSource")
-    public DataSource slaveDataSource(@Qualifier("slave") DataSourceProperties slaveDataSourceProperties) {
-        return slaveDataSourceProperties.initializeDataSourceBuilder().type(HikariDataSource.class)
-                .build();
-    }
-
 
     /**
      * 动态数据源实现方式 在这里可以进行配置动态数据源
