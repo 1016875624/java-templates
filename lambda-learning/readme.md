@@ -58,7 +58,7 @@ B
 C
 D
 ---
-	/**
+    /**
      * 将所有的数字都添加17
      */
     public static void mapToAddNum() {
@@ -132,7 +132,7 @@ reduce 其实是一个将初始值，和stream的元素值互相操作，然后�
 ```java
 // 分别用三个参数的reduce 来实现 1+2+3
 
-	/**
+    /**
      * 这里没有初始值，它会将第一个元素作为初始值来进行后面的计算
      */
     public static void reduceWithOneParameter() {
@@ -171,7 +171,7 @@ reduce 其实是一个将初始值，和stream的元素值互相操作，然后�
 这样就不用循环多次。一次就可以将想要的值全部都给统计出来
 
 ```java
- 	/**
+    /**
      * 这里注意一下，只有IntStream DoubleStream 等等基本数据类型的 stream才能获取 统计数据IntSummaryStatistics
      */
     public static void intSummary() {
@@ -193,7 +193,7 @@ reduce 其实是一个将初始值，和stream的元素值互相操作，然后�
 使用sorted这个方法，很方便我们对函数进行排序
 
 ```java
-	/**
+    /**
      * 通过id的大小进行排序
      */
     public static void sortedById() {
@@ -212,7 +212,7 @@ reduce 其实是一个将初始值，和stream的元素值互相操作，然后�
 对于非基本数据类型的对象，我们可以用这两个函数来定义哪个类的值比较大，然后取得最大值，最小值
 
 ```java
- 	/**
+    /**
      * 自定义的方式获取最大值和最小值
      */
     public static void maxById() {
@@ -234,7 +234,7 @@ reduce 其实是一个将初始值，和stream的元素值互相操作，然后�
 例如生成 Set，TreeSet,CopyOnWriteList 等集合
 
 ```java
-	/**
+    /**
      * 转换为 hashSet
      */
     public static void toHashSet() {
@@ -266,7 +266,7 @@ reduce 其实是一个将初始值，和stream的元素值互相操作，然后�
 可以借助 groupingBy的方法进行数据分组
 
 ```java
-	/**
+    /**
      * 通过年级进行分组
      */
     public static void groupByGrade() {
